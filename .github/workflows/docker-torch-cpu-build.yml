@@ -27,6 +27,6 @@ jobs:
           tags: "${{ github.actor }}/python-transformers:${{ matrix.python-tag }}-${{ matrix.transformers-version }}-torch-cpu"
           build-args: |
             PYTHON_BASE_TAG=${{ matrix.python-tag }}
-            TRANSFORMERS_VERSION="==${{ matrix.transformers-version }}"
+            TRANSFORMERS_VERSION===${{ matrix.transformers-version }}
           file: Dockerfile.torch-cpu
           context: .
