@@ -1,0 +1,11 @@
+ARG PYTHON_BASE_TAG
+
+FROM python:${PYTHON_BASE_TAG}
+
+ARG TRANSFORMERS_VERSION
+ARG EXTRA_PACKAGES=''
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gcc \
+    && python -m pip install --upgrade pip \
+    && pip install "transformers[torch]${TRANSFORMERS_VERSION}" $EXTRA_PACKAGES --extra-index-url https://download.pytorch.org/whl/cpu
