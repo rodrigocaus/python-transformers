@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         python-tag: ["3.9-slim", "3.10-slim", "3.11-slim"]
-        transformers-version: ["4.26"]
+        transformers-version: ["4.26", "4.27", "4.29"]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -27,6 +27,6 @@ jobs:
           tags: "${{ github.actor }}/python-transformers:${{ matrix.python-tag }}-${{ matrix.transformers-version }}-torch-cpu"
           build-args: |
             PYTHON_BASE_TAG=${{ matrix.python-tag }}
-            TRANSFORMERS_VERSION===${{ matrix.transformers-version }}
+            TRANSFORMERS_VERSION=~=${{ matrix.transformers-version }}
           file: Dockerfile.torch-cpu
           context: .
