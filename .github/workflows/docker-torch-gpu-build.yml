@@ -1,0 +1,32 @@
+name: Build Transformers + PyTorch GPU image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+        transformers-version: ["4.29"]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Docker Login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Docker Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: "${{ github.actor }}/python-transformers:${{ matrix.python-version }}-${{ matrix.transformers-version }}-torch-gpu"
+          build-args: |
+            PYTHON_VERSION=${{ matrix.python-version }}
+            TRANSFORMERS_VERSION=~=${{ matrix.transformers-version }}
+          file: Dockerfile.torch-cpu
+          context: .
