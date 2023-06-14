@@ -8,4 +8,4 @@ ARG EXTRA_PACKAGES=''
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc \
     && python -m pip install --upgrade pip \
-    && pip install "transformers[torch]${TRANSFORMERS_VERSION}" $EXTRA_PACKAGES --extra-index-url https://download.pytorch.org/whl/cpu
+    && pip install --no-cache-dir "transformers[torch]${TRANSFORMERS_VERSION}" $EXTRA_PACKAGES --extra-index-url https://download.pytorch.org/whl/cpu
