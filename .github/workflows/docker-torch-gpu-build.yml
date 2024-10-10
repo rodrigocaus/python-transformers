@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10"]
-        transformers-version: ["4.29"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        transformers-version: ["4.29", "4.39", "4.40", "4.45"]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
